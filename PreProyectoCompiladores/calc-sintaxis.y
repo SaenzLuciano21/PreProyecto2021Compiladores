@@ -6,7 +6,7 @@
 #include "tree.c"
 
 %}
-%union { int i; char *s; }
+%union { int i; char *s; struct nodE *p; }
 %token<i> INT
 %token<s> ID
 %token<s> TMENOS
@@ -16,43 +16,55 @@
 %token<s> RETURN
 %token<s> INTEGER
 
+%type<p> declaration
+%type<p> statement
+%type<p> statements
+%type<p> type
+%type<p> expression
+%type<p> value
+%type<p> boolean
+
 /*precedence*/
 %left '+' TMENOS
 %left '*'
 
 %%
-program: declaration ';' statements { printf("No hay errores \n"); }
+program: declaration statements { printf("No hay errores \n");
+                                  inOrder($1); }
 ;
 
-type: INTEGER           
-| BOOL                  
+type: INTEGER           { $$ = create_node($1, NULL, NULL); }
+| BOOL                  { $$ = create_node($1, NULL, NULL); }
 ;
 
 statements: statement
 | statement statements
 ;
 
-statement: RETURN expression ';'
-| ID '=' expression ';'
+statement: ID '=' expression ';'            { $$ = create_node("=", create_node($1, NULL, NULL), create_node(";", $3, NULL)); }
+| RETURN expression ';'                     { $$ = create_node(";", create_node($1, NULL, NULL), $2); }
 ;
 
-declaration: type ID '=' expression ';'
-| type ID '=' expression ';' declaration           
+/*revisar ;*/
+declaration: type ID '=' expression ';'       { $$ = create_node("=", create_node($2, $1, NULL), create_node(";", $4, NULL)); }
+| type ID '=' expression ';' declaration      { $$ = create_node("=", create_node($2, $1, NULL), create_node(";", $4, $6)); }
 ;
 
-expression: ID      
-    | value        
-    | expression '+' expression 
-    | expression '*' expression 
-    | expression TMENOS expression 
-    | '(' expression ')' 
-    ;
+expression: ID                      { $$ = create_node($1, NULL, NULL); }
+| value                             { $$ = $1; }
+| expression '+' expression         { $$ = create_node("+", $1, $3); }     
+| expression '*' expression         { $$ = create_node("*", $1, $3); }
+| expression TMENOS expression      { $$ = create_node("-", $1, $3); }
+| '(' expression ')'                { $$ = create_node("()", $2, NULL); }
+;
 
-value: INT     
-    | boolean   
-    ;
+value: INT                  { char *types = malloc(sizeof(char[SIZE]));
+                              sprintf(types, "%d", $1);
+                              $$ = create_node(types, NULL, NULL); }
+| boolean                   { $$ = $1; }
+;
 
-boolean: TRUE  
-    | FALSE     
-    ;
+boolean: TRUE                 { $$ = create_node($1, NULL, NULL); }    
+| FALSE                       { $$ = create_node($1, NULL, NULL); }
+;
 %%

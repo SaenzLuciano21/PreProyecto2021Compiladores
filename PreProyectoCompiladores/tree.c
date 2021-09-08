@@ -3,6 +3,9 @@
 #include <stdio.h>
 #define SIZE 16
 
+/*type definition*/
+//enum type { integer, bool } Ttype;
+
 /*tree definition*/
 typedef struct nodE
 {
@@ -10,11 +13,6 @@ typedef struct nodE
     struct nodE *left;
     struct nodE *right;
 } node;
-
-/*prototype*/
-node *create_node(char array[], node *left, node *right);
-void inOrder(node *facts);
-void freeMemory(node *facts);
 
 /*create a node */
 node *create_node(char array[], node *left, node *right)
