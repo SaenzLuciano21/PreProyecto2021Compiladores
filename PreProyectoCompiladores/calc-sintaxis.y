@@ -24,16 +24,13 @@
 %type<p> boolean
 
 /*precedence*/
-%left '+' TMENOS
+%left '+' '-'
 %left '*'
 
 %%
-program: declaration statements { printf("No hay errores \n");
-                                  inOrder($1); }
-;
-
-type: INTEGER           { $$ = create_node($1, NULL, NULL); }
-| BOOL                  { $$ = create_node($1, NULL, NULL); }
+program: declaration            { printf("No hay errores \n"); 
+                                  inOrder($1);
+                                  freeMemory($1); }
 ;
 
 statements: statement
@@ -44,9 +41,13 @@ statement: ID '=' expression ';'            { $$ = create_node("=", create_node(
 | RETURN expression ';'                     { $$ = create_node(";", create_node($1, NULL, NULL), $2); }
 ;
 
-/*revisar ;*/
-declaration: type ID '=' expression ';'       { $$ = create_node("=", create_node($2, $1, NULL), create_node(";", $4, NULL)); }
-| type ID '=' expression ';' declaration      { $$ = create_node("=", create_node($2, $1, NULL), create_node(";", $4, $6)); }
+declaration: type ID '=' expression ';'     { $$ = create_node("=", create_node($2, $1, NULL), create_node(";", $4, NULL)); }
+| type ID '=' expression ';' declaration    { $$ = create_node("=", create_node($2, $1, NULL), create_node(";", $4, $6)); }
+| type ID '=' expression ';' statements     { $$ = create_node("=", create_node($2, $1, NULL), create_node(";", $4, $6)); }
+;
+
+type: INTEGER           { $$ = create_node($1, NULL, NULL); }
+| BOOL                  { $$ = create_node($1, NULL, NULL); }
 ;
 
 expression: ID                      { $$ = create_node($1, NULL, NULL); }

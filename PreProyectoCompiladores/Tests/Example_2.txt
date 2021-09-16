@@ -1,0 +1,2 @@
+integer x = 2 + 3;
+x = x * 3 + x;
