@@ -1,3 +1,0 @@
-integer x = 2;
-integer y = 2;
-x = x + 3 * 2 * y;
