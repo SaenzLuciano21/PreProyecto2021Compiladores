@@ -9,7 +9,6 @@
 %union { int i; char *s; struct nodE *p; }
 %token<i> INT
 %token<s> ID
-%token<s> TMENOS
 %token<s> BOOL
 %token<s> TRUE
 %token<s> FALSE
@@ -54,7 +53,7 @@ expression: ID                      { $$ = create_node($1, NULL, NULL); }
 | value                             { $$ = $1; }
 | expression '+' expression         { $$ = create_node("+", $1, $3); }     
 | expression '*' expression         { $$ = create_node("*", $1, $3); }
-| expression TMENOS expression      { $$ = create_node("-", $1, $3); }
+| expression '-' expression      { $$ = create_node("-", $1, $3); }
 | '(' expression ')'                { $$ = create_node("()", $2, NULL); }
 ;
 
