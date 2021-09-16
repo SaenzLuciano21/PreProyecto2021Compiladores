@@ -44,13 +44,9 @@ digito [0-9]
                                 printf("RETURN: %s\n",yytext);
                                 return RETURN; }
 
-[+*;()=]                   	{	
+[+*;()=-]                   	{	
                                 printf("%s\n",yytext);
                             	return *yytext; }
-
-"-"                       	{	
-                                printf("%s\n",yytext);
-                                return TMENOS; }
 
 {digito}+                   { 
                                 yylval.i=atoi(yytext);
