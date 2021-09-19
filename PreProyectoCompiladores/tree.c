@@ -3,46 +3,50 @@
 #include <stdio.h>
 #define SIZE 16
 
-/*type definition*/
-//enum type { integer, bool } Ttype;
-
-/*tree definition*/
-typedef struct nodE
+/*
+typedef struct infoToken 
 {
-    char *fact;
-    struct nodE *left;
-    struct nodE *right;
-} node;
+    int value;
+    int line;
+} info;
+*/
 
-/*create a node */
-node *create_node(char array[], node *left, node *right)
+struct bTree {
+    char * fact;
+    struct btree * right, * left;
+};
+
+typedef struct bTree node;
+
+node * create_node(char array[], node * left, node * right)
 {
     node *new;
-    new = (node *)malloc(sizeof(node));
+    new = (node *) malloc(sizeof(node));
     new->fact = array;
     new->left = left;
     new->right = right;
     return new;
 }
 
-/*walk the tree*/
-void inOrder(node *facts)
+/*free up memory*/
+void freeMemory(node * tree)
 {
-    if (facts != NULL)
-    {
-        inOrder(facts->left);
-        printf(" %s |", facts->fact);
-        inOrder(facts->right);
+    if (tree)
+    {   
+        freeMemory(tree->fact);
+        freeMemory(tree->left);
+        freeMemory(tree->right);
+        free(tree);
     }
 }
 
-/*free up memory*/
-void freeMemory(node *facts)
+/*walk the tree*/
+void inOrder(node * tree)
 {
-    if (facts != NULL)
+    if (tree)
     {
-        freeMemory(facts->left);
-        freeMemory(facts->right);
-        free(facts);
+        inOrder(tree->left);
+        printf(" %s |", tree->fact);
+        inOrder(tree->right);
     }
 }
