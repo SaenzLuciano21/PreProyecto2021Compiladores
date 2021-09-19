@@ -29,7 +29,7 @@
 
 %%
 program: declaration            { printf("No hay errores \n"); 
-                                  //inOrder($1);
+                                  inOrder($1);
                                   freeMemory($1); }
 ;
 
