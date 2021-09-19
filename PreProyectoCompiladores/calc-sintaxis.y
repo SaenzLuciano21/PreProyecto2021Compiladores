@@ -6,7 +6,7 @@
 #include "tree.c"
 
 %}
-%union { int i; char *s; struct nodE *p; }
+%union { int i; char *s; struct bTree *p; }
 %token<i> INT
 %token<s> ID
 %token<s> BOOL
