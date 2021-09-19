@@ -13,7 +13,7 @@ typedef struct infoToken
 
 struct bTree {
     char * fact;
-    struct btree * right, * left;
+    struct bTree * right, * left;
 };
 
 typedef struct bTree node;
@@ -33,7 +33,6 @@ void freeMemory(node * tree)
 {
     if (tree)
     {   
-        freeMemory(tree->fact);
         freeMemory(tree->left);
         freeMemory(tree->right);
         free(tree);
