@@ -6,7 +6,7 @@
 #include "tree.c"
 
 %}
-%union { int i; char *s; struct nodE *p; }
+%union { int i; char *s; struct bTree *p; }
 %token<i> INT
 %token<s> ID
 %token<s> BOOL
@@ -29,7 +29,7 @@
 
 %%
 program: declaration            { printf("No hay errores \n"); 
-                                  inOrder($1);
+                                  //inOrder($1);
                                   freeMemory($1); }
 ;
 
