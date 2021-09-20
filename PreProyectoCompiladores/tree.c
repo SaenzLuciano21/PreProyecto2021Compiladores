@@ -3,28 +3,35 @@
 #include <stdio.h>
 #define SIZE 16
 
-/*
+
+enum tType{bool, integer};
+enum tLabel{DEC, STM, VAL, VAR, SUMA, MULT, RESTA, PROG};
+
 typedef struct infoToken 
 {
     int value;
     int line;
+    enum tType type;
+    char * name;
 } info;
-*/
+
 
 struct bTree {
-    char * fact;
+    enum tLabel * fact;
     struct bTree * right, * left;
+    info * infoN;
 };
 
 typedef struct bTree node;
 
-node * create_node(char array[], node * left, node * right)
+node * create_node(enum tLabel label, info * infN, node * left, node * right)
 {
     node *new;
     new = (node *) malloc(sizeof(node));
-    new->fact = array;
+    new->fact = label;
     new->left = left;
     new->right = right;
+    new->infoN = infN;
     return new;
 }
 
