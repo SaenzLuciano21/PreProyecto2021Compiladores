@@ -7,8 +7,8 @@
 
 struct bTree *ast;
 
-%}
-%union { int i; char *s; struct bTree *p; enum tType t; }
+%} 
+%union { int i; char *s; struct bTree *p; enum tType * t; }
 %token<i> INT
 %token<s> ID
 %token<s> BOOL
@@ -58,11 +58,11 @@ declarations: declaration                   { $$ = $1; }
 ;
 
 declaration: type ID '=' expression ';'     { info *infD = (info *)malloc(sizeof(info));
-                                            infD->name=$2->info->name; infD->type=$1;
+                                            infD->name=$2; infD->type=*$1;
                                             $$ = create_node(DEC, infD, NULL, $4); }
 ;
 
-type: INTEGER           { $$ = integer; }
+type: INTEGER           { $$ = (enum tType *)integer; }
 | BOOL                  { $$ = bool; }
 ;
 
