@@ -65,7 +65,7 @@ declaration: type ID '=' expression ';'     { info *infD = (info *)malloc(sizeof
 type: INTEGER                               { enum tType *aux = (enum tType *)malloc(sizeof(enum tType)); 
                                             *aux=integer; $$=aux; }
 | BOOL                                      { enum tType *aux = (enum tType *) malloc (sizeof(enum tType)); 
-                                            *aux=integer; $$=aux; }
+                                            *aux=bool; $$=aux; }
 ;
 
 expression: ID                              { info *infV = (info *)malloc(sizeof(info));
