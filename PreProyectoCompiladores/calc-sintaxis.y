@@ -62,8 +62,8 @@ declaration: type ID '=' expression ';'     { info *infD = (info *)malloc(sizeof
                                             $$ = create_node(DEC, infD, NULL, $4); }
 ;
 
-type: INTEGER           { $$ = (enum tType *)integer; }
-| BOOL                  { $$ = bool; }
+type: INTEGER           { enum tType *aux = (enum tType *) malloc (sizeof(enum tType)); *aux=integer; $$=aux; }
+| BOOL                  { enum tType *aux = (enum tType *) malloc (sizeof(enum tType)); *aux=integer; $$=aux; }
 ;
 
 expression: ID                              { info *infV = (info *)malloc(sizeof(info));
