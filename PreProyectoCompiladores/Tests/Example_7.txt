@@ -1,0 +1,3 @@
+integer y = 2;
+integer x = 45 * 1;
+return y + x;

@@ -1,0 +1,5 @@
+integer x = 2 + x;
+bool z = true;
+integer y = 2;
+x = x * 3 + y;
+return z;
