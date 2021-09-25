@@ -2,9 +2,16 @@
 #include <string.h>
 #include <stdio.h>
 
+/*como deberia ser los nodos de la lista*/
+struct  node {
+    info *infoN:
+    struct node *next;
+};
+
 /*Estructura del nodo*/
 struct node
 {
+    /*puntero a info token y un puntero a next*/
     char *name;
     int value, valueBool;
     struct node *next;
@@ -13,14 +20,15 @@ struct node
 /*Definicion del nombre de la lista*/
 typedef struct node TList; 
 
-//perfil de las funciones
+/*perfil de las funciones*/
 void Insert(TList *lista, char *name, int valor, int valorBool);
 void ShowList(TList *lista);
 void EmptyList(TList *lista);
 int IsEmpty(TList *lista);
 int getElement(TList *lista, char *name);
 
-//Insertar nodo
+/*hacer lo mismo que en el node, retornar la lista xq sino tendremos problemas con los punteros de punteros*/
+/*Insertar nodo*/
 void Insert(TList *lista, char *name, int valor, int valorBool)
 {
     TList *nuevo;
@@ -32,7 +40,7 @@ void Insert(TList *lista, char *name, int valor, int valorBool)
     lista = nuevo;
 }
 
-//Imprimir lista
+/*Imprimir lista*/
 void ShowList(TList *lista)
 {
     TList *nodo = lista;
@@ -50,7 +58,7 @@ void ShowList(TList *lista)
     }
 }
 
-//Vaciar toda la lista
+/*Vaciar toda la lista*/
 void EmptyList(TList *lista)
 {
     TList *nodo;
@@ -69,15 +77,17 @@ void EmptyList(TList *lista)
         printf(" Lista vacia..!\n");
 }
 
-//Lista Vacia
+/*Lista Vacia*/
 int IsEmpty(TList *lista)
 {
     return (lista == NULL);
 }
 
+/*hacer otra funcion de getelement*/
+/*retornar el puntero a toda la info de las variables*/
 int getElement(TList *lista, char *name)
 {
-    //Conocer si es vacia
+    /*Conocer si es vacia*/
     if (!IsEmpty(lista))
     {
         printf(" Lista vacia..!\n");
@@ -101,3 +111,5 @@ int getElement(TList *lista, char *name)
         return -1;
     }
 }
+
+/*armar un inorder que muestre el hijo izq con la informacion*/

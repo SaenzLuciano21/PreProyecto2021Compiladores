@@ -35,6 +35,8 @@ program: declarations statements            { info *infS = (info *)malloc(sizeof
                                               ast = create_node(PROG, infS, $1, $2); 
                                               print("Tabla de Simbolos \n");
                                               inOrder(ast);
+                                              /*usar el ast para recorrelo y hacer los chequeos*/
+                                              /*crear un archivo para las estructuras node, tree, table simbol*/
                                               freeMemory(ast); }
 ;
 

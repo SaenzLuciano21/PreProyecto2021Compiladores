@@ -38,6 +38,8 @@ node * create_node(enum tLabel label, info * infN, node * left, node * right) {
     new->right = right;
     new->infoN = infN;
     /*Insercion en la lista (tabla de simbolos)*/
+    /*corregir, no queremos almacenar todos los nodos
+    la lista debe ser de infotouken*/
     Insert(lista, infN->name, infN->value, infN->value);
     return new;
 }
@@ -65,3 +67,5 @@ void inOrder(node * tree) {
         inOrder(tree->right);*/
     }
 }
+
+/*con el arbol ya generado, recorrerlo como en el inorder y armar la tabla de simbol*/
