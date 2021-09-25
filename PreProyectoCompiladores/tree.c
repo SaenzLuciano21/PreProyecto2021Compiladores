@@ -3,28 +3,7 @@
 #include <stdio.h>
 #include "symbol-table.c"
 #define SIZE 16
-
-/*Definicion de tipos enumerados*/
-enum tType{bool, integer};
-enum tLabel{DEC, STM, VAL, VAR, SUMA, MULT, RESTA, PROG};
-
-/*Estructura del nodo*/
-typedef struct infoToken {
-    int value;
-    int line;
-    enum tType type;
-    char * name;
-} info;
-
-/*Estructura del arbol*/
-struct bTree {
-    enum tLabel fact;
-    struct bTree * right, * left;
-    info * infoN;
-};
-
-/*Definicion del nombre del arbol*/
-typedef struct bTree node;
+#include "Structs.h"
 
 /*Creacion de la lista e inicializacion*/
 TList *lista = NULL;

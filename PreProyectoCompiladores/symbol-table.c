@@ -1,31 +1,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "Structs.h"
 
-/*como deberia ser los nodos de la lista*/
-struct  node {
-    info *infoN:
-    struct node *next;
-};
-
-/*Estructura del nodo*/
+/*Estructura del nodo
 struct node
 {
-    /*puntero a info token y un puntero a next*/
+    /*puntero a info token y un puntero a next
     char *name;
     int value, valueBool;
     struct node *next;
 };
 
-/*Definicion del nombre de la lista*/
-typedef struct node TList; 
-
-/*perfil de las funciones*/
-void Insert(TList *lista, char *name, int valor, int valorBool);
-void ShowList(TList *lista);
-void EmptyList(TList *lista);
-int IsEmpty(TList *lista);
-int getElement(TList *lista, char *name);
+/*Definicion del nombre de la lista
+typedef struct node TList; */
 
 /*hacer lo mismo que en el node, retornar la lista xq sino tendremos problemas con los punteros de punteros*/
 /*Insertar nodo*/
