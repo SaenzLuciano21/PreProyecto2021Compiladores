@@ -1,0 +1,3 @@
+bool y = true;
+bool z = false;
+return y + z;
