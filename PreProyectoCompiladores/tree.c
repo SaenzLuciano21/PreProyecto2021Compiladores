@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "symbol-table.c"
-#define SIZE 16
 #include "Structs.h"
+#define SIZE 16
 
 /*Creacion de la lista e inicializacion*/
 TList *lista = NULL;
@@ -19,7 +19,6 @@ node * create_node(enum tLabel label, info * infN, node * left, node * right) {
     /*Insercion en la lista (tabla de simbolos)*/
     /*corregir, no queremos almacenar todos los nodos
     la lista debe ser de infotouken*/
-    Insert(lista, infN->name, infN->value, infN->value);
     return new;
 }
 

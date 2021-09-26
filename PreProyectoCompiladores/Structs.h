@@ -4,8 +4,9 @@
 /*********************Struct and operations of symbol table***************/
 
 /*como deberia ser los nodos de la lista*/
-struct  node {
-    info *infoN:
+struct node
+{
+    info *infoN;
     struct node *next;
 };
 
@@ -13,39 +14,58 @@ struct  node {
 typedef struct node TList;
 
 /*perfil de las funciones*/
-void Insert(TList *lista, char *name, int valor, int valorBool);
+TList *Insert(TList *lista);
 void ShowList(TList *lista);
 void EmptyList(TList *lista);
 int IsEmpty(TList *lista);
-int getElement(TList *lista, char *name);
+TList *getElement(TList *lista, char *name);
 
 /**********************Structs and operations of tree****************/
 
 /*Definicion de tipos enumerados*/
-enum tType{boolean, integer};
-enum tLabel{DEC, STM, VAL, VAR, SUMA, MULT, RESTA, PROG};
+enum tType
+{
+    boolean,
+    integer
+};
+enum tLabel
+{
+    DEC,
+    STM,
+    VAL,
+    VAR,
+    SUMA,
+    MULT,
+    RESTA,
+    PROG
+};
 
 /*Estructura del nodo*/
-typedef struct infoToken {
+typedef struct infoToken
+{
     int value;
     int line;
     enum tType type;
-    char * name;
-} info;
+    char *name;
+};
+
+/*Definicion del nombre del nodo*/
+typedef struct infoToken info;
 
 /*Estructura del arbol*/
-struct bTree {
+struct bTree
+{
     enum tLabel fact;
-    struct bTree * right, * left;
-    info * infoN;
+    struct bTree *right, *left;
+    info *infoN;
 };
 
 /*Definicion del nombre del arbol*/
 typedef struct bTree node;
 
 /*perfil de las funciones*/
-node *create_node(enum tLabel label, info * infN, node * left, node * right);
-void freeMemory(node * tree);
-void inOrder(node * tree);
+node *create_node(enum tLabel label, info *infN, node *left, node *right);
+void freeMemory(node *tree);
+void inOrder(node *tree);
 
 #endif

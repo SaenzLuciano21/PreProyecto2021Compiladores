@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "tree.c"
+#include "Structs.h"
 
 struct bTree *ast;
 
@@ -68,14 +69,23 @@ type: INTEGER                               { enum tType *aux = (enum tType *)ma
                                               *aux=bool; $$=aux; }
 ;
 
-expression: ID                              { info *infV = (info *)malloc(sizeof(info));
+expression: ID                              { ShowList(ast);
+                                              if(exist(*ast, $1))
+                                              {
+                                                $$ = insert(*ast);
+                                              }
+                                              else
+                                              {
+                                                  printf("%s%s\n", "ID no declarado :",$1);
+                                              }
+                                              info *infV = (info *)malloc(sizeof(info));
                                               infV->name=$1;
                                               $$ = create_node(VAR, infV, NULL, NULL); }
 | value                                     { $$ = $1; }
 | expression '+' expression                 { info *infE = (info *)malloc(sizeof(info));
                                               infE->name = (char *)malloc(sizeof(char)*5);
                                               strcpy(infE->name,"+");  
-                                              $$ = create_node(SUMA, infE, $1, $3); }     
+                                              $$ = create_node(SUMA, infE, $1, $3); }
 | expression '*' expression                 { info *infE = (info *)malloc(sizeof(info));
                                               infE->name = (char *)malloc(sizeof(char)*5);
                                               strcpy(infE->name,"*");  
