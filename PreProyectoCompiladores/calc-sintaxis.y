@@ -34,7 +34,7 @@ struct bTree *ast;
 %%
 program: declarations statements            { info *infS = (info *)malloc(sizeof(info));
                                               ast = create_node(PROG, infS, $1, $2); 
-                                              print("Tabla de Simbolos \n");
+                                              printf("Tabla de Simbolos \n");
                                               inOrder(ast);
                                               /*usar el ast para recorrelo y hacer los chequeos*/
                                               /*crear un archivo para las estructuras node, tree, table simbol*/
@@ -69,7 +69,7 @@ type: INTEGER                               { enum tType *aux = (enum tType *)ma
                                               *aux=bool; $$=aux; }
 ;
 
-expression: ID                              { ShowList(ast);
+expression: ID                              { ShowList(*ast);
                                               if(exist(*ast, $1))
                                               {
                                                 $$ = insert(*ast);

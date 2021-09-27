@@ -8,10 +8,10 @@
 /*Creacion de la lista e inicializacion*/
 TList *lista = NULL;
 
-/*Create node*/
-node * create_node(enum tLabel label, info * infN, node * left, node * right) {
-    node *new;
-    new = (node *) malloc(sizeof(node));
+/*Create bNode*/
+bNode * create_bNode(enum tLabel label, info * infN, bNode * left, bNode * right) {
+    bNode *new;
+    new = (bNode *) malloc(sizeof(bNode));
     new->fact = label;
     new->left = left;
     new->right = right;
@@ -23,7 +23,7 @@ node * create_node(enum tLabel label, info * infN, node * left, node * right) {
 }
 
 /*Free up memory*/
-void freeMemory(node * tree) {
+void freeMemory(bNode * tree) {
     if (tree)
     {   
         freeMemory(tree->left);
@@ -33,7 +33,7 @@ void freeMemory(node * tree) {
 }
 
 /*Walk the tree*/
-void inOrder(node * tree) {
+void inOrder(bNode * tree) {
     if (tree)
     {   
         /*Visualizacion de la tabla de simbolos*/

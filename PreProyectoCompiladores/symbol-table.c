@@ -25,7 +25,7 @@ void showList(TList *lista)
     {
         while (nodo)
         {
-            printf("%s %d -> ", nodo->infoN->name, "-", nodo->infoN->value);
+            printf("%s - %d -> ", nodo->infoN->name, nodo->infoN->value);
             nodo = nodo->next;
         }
         printf("\n");
@@ -89,7 +89,7 @@ TList *getElement(TList *lista, char *name)
 /**/
 int exist(TList *list, char *name)
 {
-    if (isEmpty(list) == 1)
+    if (isEmpty(list))
     {
         printf("LISTA VACIA ");
     }
