@@ -2,29 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "symbol-table.c"
+#include "Structs.h"
 #define SIZE 16
-
-/*Definicion de tipos enumerados*/
-enum tType{bool, integer};
-enum tLabel{DEC, STM, VAL, VAR, SUMA, MULT, RESTA, PROG};
-
-/*Estructura del nodo*/
-typedef struct infoToken {
-    int value;
-    int line;
-    enum tType type;
-    char * name;
-} info;
-
-/*Estructura del arbol*/
-struct bTree {
-    enum tLabel fact;
-    struct bTree * right, * left;
-    info * infoN;
-};
-
-/*Definicion del nombre del arbol*/
-typedef struct bTree node;
 
 /*Creacion de la lista e inicializacion*/
 TList *lista = NULL;
@@ -38,7 +17,8 @@ node * create_node(enum tLabel label, info * infN, node * left, node * right) {
     new->right = right;
     new->infoN = infN;
     /*Insercion en la lista (tabla de simbolos)*/
-    Insert(lista, infN->name, infN->value, infN->value);
+    /*corregir, no queremos almacenar todos los nodos
+    la lista debe ser de infotouken*/
     return new;
 }
 
@@ -65,3 +45,5 @@ void inOrder(node * tree) {
         inOrder(tree->right);*/
     }
 }
+
+/*con el arbol ya generado, recorrerlo como en el inorder y armar la tabla de simbol*/
