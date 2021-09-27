@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "tree.c"
-#include "Structs.h"
+#include "listGen.c"
 
 struct bTree *ast;
+struct node *symList;
 
 %} 
 %union { int i; char *s; struct bTree *p; enum tType * t; }
@@ -34,11 +34,14 @@ struct bTree *ast;
 %%
 program: declarations statements            { info *infS = (info *)malloc(sizeof(info));
                                               ast = create_node(PROG, infS, $1, $2); 
-                                              printf("Tabla de Simbolos \n");
                                               inOrder(ast);
+                                              findDecs(symList, ast); 
+                                              // findDecs no me está creando la lista, symList queda null
+                                              printf("Tabla de Simbolos \n");
+                                              showList(symList);
                                               /*usar el ast para recorrelo y hacer los chequeos*/
                                               /*crear un archivo para las estructuras node, tree, table simbol*/
-                                              freeMemory(ast); }
+                                            }
 ;
 
 statements: statement                       { $$ = $1; }
@@ -69,16 +72,7 @@ type: INTEGER                               { enum tType *aux = (enum tType *)ma
                                               *aux=bool; $$=aux; }
 ;
 
-expression: ID                              { ShowList(*ast);
-                                              if(exist(*ast, $1))
-                                              {
-                                                $$ = insert(*ast);
-                                              }
-                                              else
-                                              {
-                                                  printf("%s%s\n", "ID no declarado :",$1);
-                                              }
-                                              info *infV = (info *)malloc(sizeof(info));
+expression: ID                              { info *infV = (info *)malloc(sizeof(info));
                                               infV->name=$1;
                                               $$ = create_node(VAR, infV, NULL, NULL); }
 | value                                     { $$ = $1; }

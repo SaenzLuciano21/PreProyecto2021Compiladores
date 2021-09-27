@@ -1,15 +1,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "symbol-table.c"
 #include "Structs.h"
 #define SIZE 16
 
-/*Creacion de la lista e inicializacion*/
-TList *lista = NULL;
-
 /*Create bNode*/
-bNode * create_bNode(enum tLabel label, info * infN, bNode * left, bNode * right) {
+bNode * create_node(enum tLabel label, info * infN, bNode * left, bNode * right) {
     bNode *new;
     new = (bNode *) malloc(sizeof(bNode));
     new->fact = label;
@@ -36,13 +32,9 @@ void freeMemory(bNode * tree) {
 void inOrder(bNode * tree) {
     if (tree)
     {   
-        /*Visualizacion de la tabla de simbolos*/
-        ShowList(lista);
-        
-        /*Visualizacion del arbol
         inOrder(tree->left);
         printf(" %s |", tree->infoN->name);
-        inOrder(tree->right);*/
+        inOrder(tree->right);
     }
 }
 

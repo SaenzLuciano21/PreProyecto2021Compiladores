@@ -1,29 +1,28 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "Structs.h"
+#include "tree.c"
 
 /*hacer lo mismo que en el node, retornar la lista xq sino tendremos problemas con los punteros de punteros*/
 /*Insertar nodo*/
-TList *insert(TList *lista, info *nodeinfo)
+void insert(list *lista, info *nodeinfo)
 {   
-    // checks if the element already exists in the list
-    if(!exist(lista, nodeinfo->name)) {
-        TList *nuevo;
-        nuevo = (TList *)malloc(sizeof(TList));
+    // checks if the element already containss in the list
+    if(!contains(lista, nodeinfo->name)) {
+        list *nuevo;
+        nuevo = (list *)malloc(sizeof(list));
         nuevo->infoN = nodeinfo;
         nuevo->next = lista;
         lista = nuevo;
-        return nuevo;
     }
 }
 
 /*Imprimir lista*/
-void showList(TList *lista)
+void showList(list *lista)
 {
-    TList *nodo = lista;
+    list *nodo = lista;
 
-    if (IsEmpty(nodo))
+    if (!nodo)
         printf("Lista vacia\n");
     else
     {
@@ -37,9 +36,9 @@ void showList(TList *lista)
 }
 
 /*Vaciar toda la lista*/
-void emptyList(TList *lista)
+void emptyList(list *lista)
 {
-    TList *nodo;
+    list *nodo;
     nodo = lista;
 
     if (lista != NULL)
@@ -55,25 +54,19 @@ void emptyList(TList *lista)
         printf(" Lista vacia..!\n");
 }
 
-/*Lista Vacia*/
-int isEmpty(TList *lista)
-{
-    return (lista == NULL);
-}
-
 /*hacer otra funcion de getelement*/
 /*retornar el puntero a toda la info de las variables*/
-TList *getElement(TList *lista, char *name)
+list *getElement(list *lista, char *name)
 {
     /*Conocer si es vacia*/
-    if (!IsEmpty(lista))
+    if (lista)
     {
         printf(" Lista vacia..!\n");
         return NULL;
     }
     else
     {
-        TList *nodo;
+        list *nodo;
         nodo = lista;
         while (lista != NULL)
         {
@@ -89,17 +82,13 @@ TList *getElement(TList *lista, char *name)
 }
 
 /**/
-int exist(TList *list, char *name)
+int contains(list *plist, char *name)
 {
-    if (isEmpty(list))
+    if(plist)
     {
-        printf("LISTA VACIA ");
-    }
-    else
-    {
-        TList *aux = malloc(sizeof(TList));
-        aux = list;
-        while (isEmpty(aux) != 1)
+        list *aux = malloc(sizeof(list));
+        aux = plist;
+        while (aux)
         {
             if (strcmp(aux->infoN->name, name) == 0)
             {

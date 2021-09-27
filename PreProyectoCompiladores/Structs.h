@@ -7,7 +7,7 @@
 
 enum tLabel { DEC, STM, VAL, VAR, SUMA, MULT, RESTA, PROG };
 
-enum tType { boolean, integer };
+enum tType { bool, integer };
 
 /*Estructura del nodo*/
 struct infoToken
@@ -28,19 +28,17 @@ struct node
 };
 
 /*Definicion del nombre de la lista*/
-typedef struct node TList;
+typedef struct node list;
 
 /*perfil de las funciones*/
-TList *Insert(TList *lista);
-void ShowList(TList *lista);
-void EmptyList(TList *lista);
-int IsEmpty(TList *lista);
-TList *getElement(TList *lista, char *name);
+void insert(list *lista, info *nodeinfo);
+void showList(list *lista);
+void emptyList(list *lista);
+list *getElement(list *lista, char *name);
+int contains(list *plist, char *name);
+
 
 /**********************Structs and operations of tree****************/
-
-/*Definicion del nombre del nodo*/
-typedef struct infoToken info;
 
 /*Estructura del arbol*/
 struct bTree
@@ -54,7 +52,7 @@ struct bTree
 typedef struct bTree bNode;
 
 /*perfil de las funciones*/
-bNode *create_node(enum tLabel label, info *infN, bNode *left, bNode *right);
+bNode * create_node(enum tLabel label, info * infN, bNode * left, bNode * right);
 void freeMemory(bNode *tree);
 void inOrder(bNode *tree);
 
