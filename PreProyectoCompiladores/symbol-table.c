@@ -5,13 +5,17 @@
 
 /*hacer lo mismo que en el node, retornar la lista xq sino tendremos problemas con los punteros de punteros*/
 /*Insertar nodo*/
-TList *insert(TList *lista)
-{
-    TList *nuevo;
-    nuevo = (TList *)malloc(sizeof(TList));
-    nuevo->next = lista;
-    lista = nuevo;
-    return nuevo;
+TList *insert(TList *lista, info *nodeinfo)
+{   
+    // checks if the element already exists in the list
+    if(!exist(lista, nodeinfo->name)) {
+        TList *nuevo;
+        nuevo = (TList *)malloc(sizeof(TList));
+        nuevo->infoN = nodeinfo;
+        nuevo->next = lista;
+        lista = nuevo;
+        return nuevo;
+    }
 }
 
 /*Imprimir lista*/
@@ -83,8 +87,6 @@ TList *getElement(TList *lista, char *name)
         return NULL;
     }
 }
-
-/*armar un inorder que muestre el hijo izq con la informacion*/
 
 /**/
 int exist(TList *list, char *name)
