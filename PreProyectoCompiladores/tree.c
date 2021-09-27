@@ -16,8 +16,7 @@ node * create_node(enum tLabel label, info * infN, node * left, node * right) {
     new->left = left;
     new->right = right;
     new->infoN = (struct info *)infN;
-    if(!exist(lista, infN->name))
-        *lista = *insert(lista, (struct info *)infN);
+    *lista = *insert(lista, (struct info *)infN);
     /*Insercion en la lista (tabla de simbolos)*/
     /*corregir, no queremos almacenar todos los nodos
     la lista debe ser de infotouken*/
@@ -39,7 +38,7 @@ void inOrder(node * tree) {
     if (tree)
     {   
         /*Visualizacion de la tabla de simbolos*/
-        ShowList(lista);
+        showList(lista);
         
         /*Visualizacion del arbol
         inOrder(tree->left);

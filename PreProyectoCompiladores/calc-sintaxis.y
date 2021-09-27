@@ -69,7 +69,7 @@ type: INTEGER                               { enum tType *aux = (enum tType *)ma
                                               *aux=boolean; $$=aux; }
 ;
 
-expression: ID                              { /*ShowList(ast);
+expression: ID                              { /*showList(ast);
                                               if(exist(*ast, $1))
                                               {
                                                 $$ = insert(*ast);

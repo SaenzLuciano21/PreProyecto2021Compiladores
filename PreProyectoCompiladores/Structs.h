@@ -42,9 +42,9 @@ typedef struct node TList;
 
 /*perfil de las funciones*/
 TList *insert(TList *lista, struct info *info);
-void ShowList(TList *lista);
-void EmptyList(TList *lista);
-int IsEmpty(TList *lista);
+void showList(TList *lista);
+void emptyList(TList *lista);
+int isEmpty(TList *lista);
 TList *getElement(TList *lista, char *name);
 
 /**********************Structs and operations of tree****************/

@@ -15,6 +15,7 @@ TList *insert(TList *lista, struct info *info)
     nuevo = (TList *)malloc(sizeof(TList));
     nuevo->infoN = info;
     nuevo->next = (struct TList *)lista;
+    lista = nuevo;
     return nuevo;
 }
 
@@ -23,7 +24,7 @@ void showList(TList *lista)
 {
     TList *nodo = lista;
 
-    if (IsEmpty(nodo))
+    if (isEmpty(nodo))
         printf("Lista vacia\n");
     else
     {
@@ -66,7 +67,7 @@ int isEmpty(TList *lista)
 TList *getElement(TList *lista, char *name)
 {
     /*Conocer si es vacia*/
-    if (!IsEmpty(lista))
+    if (!isEmpty(lista))
     {
         printf(" Lista vacia..!\n");
         return NULL;
