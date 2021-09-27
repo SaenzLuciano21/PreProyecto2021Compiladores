@@ -34,7 +34,7 @@ struct bTree *ast;
 %%
 program: declarations statements            { info *infS = (info *)malloc(sizeof(info));
                                               ast = create_node(PROG, infS, $1, $2); 
-                                              print("Tabla de Simbolos \n");
+                                              printf("Tabla de Simbolos \n");
                                               inOrder(ast);
                                               /*usar el ast para recorrelo y hacer los chequeos*/
                                               /*crear un archivo para las estructuras node, tree, table simbol*/
@@ -66,10 +66,10 @@ declaration: type ID '=' expression ';'     { info *infD = (info *)malloc(sizeof
 type: INTEGER                               { enum tType *aux = (enum tType *)malloc(sizeof(enum tType)); 
                                               *aux=integer; $$=aux; }
 | BOOL                                      { enum tType *aux = (enum tType *) malloc (sizeof(enum tType)); 
-                                              *aux=bool; $$=aux; }
+                                              *aux=boolean; $$=aux; }
 ;
 
-expression: ID                              { ShowList(ast);
+expression: ID                              { /*ShowList(ast);
                                               if(exist(*ast, $1))
                                               {
                                                 $$ = insert(*ast);
@@ -77,7 +77,7 @@ expression: ID                              { ShowList(ast);
                                               else
                                               {
                                                   printf("%s%s\n", "ID no declarado :",$1);
-                                              }
+                                              }*/
                                               info *infV = (info *)malloc(sizeof(info));
                                               infV->name=$1;
                                               $$ = create_node(VAR, infV, NULL, NULL); }

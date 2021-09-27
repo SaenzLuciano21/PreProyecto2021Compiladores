@@ -3,14 +3,18 @@
 #include <stdio.h>
 #include "Structs.h"
 
+
+
+
+
 /*hacer lo mismo que en el node, retornar la lista xq sino tendremos problemas con los punteros de punteros*/
 /*Insertar nodo*/
-TList *insert(TList *lista)
+TList *insert(TList *lista, struct info *info)
 {
     TList *nuevo;
     nuevo = (TList *)malloc(sizeof(TList));
-    nuevo->next = lista;
-    lista = nuevo;
+    nuevo->infoN = info;
+    nuevo->next = (struct TList *)lista;
     return nuevo;
 }
 
@@ -25,8 +29,8 @@ void showList(TList *lista)
     {
         while (nodo)
         {
-            printf("%s %d -> ", nodo->infoN->name, "-", nodo->infoN->value);
-            nodo = nodo->next;
+            printf("%s '-' %d -> ", infoName((info *)nodo->infoN), infoValue((info *)nodo->infoN));
+            nodo = (TList *)nodo->next;
         }
         printf("\n");
     }
@@ -43,7 +47,7 @@ void emptyList(TList *lista)
         while (lista != NULL)
         {
             nodo = lista;
-            lista = lista->next;
+            lista = (TList *)lista->next;
             free(nodo);
         }
     }
@@ -73,11 +77,11 @@ TList *getElement(TList *lista, char *name)
         nodo = lista;
         while (lista != NULL)
         {
-            if (strcmp(lista->infoN->name, name) == 0)
+            if (strcmp(infoName((info *)lista->infoN), name) == 0)
             {
                 return lista;
             }
-            lista = lista->next;
+            lista = (TList *)lista->next;
         }
         printf("Elemento no encontrado \n");
         return NULL;
@@ -99,11 +103,11 @@ int exist(TList *list, char *name)
         aux = list;
         while (isEmpty(aux) != 1)
         {
-            if (strcmp(aux->infoN->name, name) == 0)
+            if (strcmp(infoName((info *)aux->infoN), name) == 0)
             {
                 return 1;
             }
-            aux = aux->next;
+            aux = (TList *)aux->next;
         }
     }
     return 0;
